@@ -14,3 +14,18 @@ if 1:
         ])
         logfile = os.path.join(outdir, f'eFEDS_V{Version:03d}{VersApp}.par')
 
+EvtImgFiles = [os.path.join(outdir, f"{outprefix}02{bname}_EvtImg.fits") for bname in bandname]
+        "emin=" + " ".join(f"{x:g}" for x in emin_keV)
+
+cmd_erbox2 = ["erbox",
+        f"images={' '.join(EvtImgFiles)}",
+        f"boxlist={BoxCat2}",
+        f"expimages={' '.join(ExpMapFiles)}",
+        f"detmasks={DetMask}",
+        f"bkgimages={' '.join(BkgMapFiles)}",
+        f"emin=" + " ".join(f"{x*1000:g}" for x in emin_keV),
+        f"emax=" + " ".join(f"{x*1000:g}" for x in emax_keV),
+        f"hrdef=",
+        f"ecf=" + " ".join(f"{x:g}" for x in ecf),
+        f"nruns=2",
+        ]
